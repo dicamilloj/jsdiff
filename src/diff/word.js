@@ -35,6 +35,20 @@ wordDiff.equals = function(left, right) {
 wordDiff.tokenize = function(value) {
   let tokens = value.split(this.options.tokenizeHtml ? /((?:<[^>]+>)|\s+|[()[\]{}'"]|\b)/ : /(\s+|[()[\]{}'"]|\b)/);
 
+  if (this.options.normalizeQuotes) {
+    tokens = tokens.map((token) => {
+      if (['"', '“', '”', '”'].includes(token)) {
+        return '"';
+      }
+
+      if (['\‘', '\’', '\''].includes(token)) {
+        return '\'';
+      }
+
+      return token;
+    });
+  }
+
   // Join the boundary splits that we do not consider to be boundaries. This is primarily the extended Latin character set.
   for (let i = 0; i < tokens.length - 1; i++) {
     // If we have an empty string in the next field and we have only word chars before and after, merge

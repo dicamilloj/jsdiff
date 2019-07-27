@@ -14,6 +14,11 @@ describe('WordDiff', function() {
       expect(convertChangesToXML(diffResult)).to.equal('<ins>&lt;h1&gt;</ins>New Value<ins> test&lt;/h1&gt; &lt;b&gt;additional&lt;/b&gt; value</ins>');
     });
 
+    it('should diff on normalized quotes', function() {
+      const diffResult = diffWords('New Value”', 'New Value"', { normalizeQuotes: true });
+      expect(convertChangesToXML(diffResult)).to.equal('New Value&quot;');
+    });
+
     it('should diff whitespace', function() {
       const diffResult = diffWords('New Value', 'New  ValueMoreData');
       expect(convertChangesToXML(diffResult)).to.equal('New  <del>Value</del><ins>ValueMoreData</ins>');
