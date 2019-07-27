@@ -5,6 +5,15 @@ import {expect} from 'chai';
 
 describe('WordDiff', function() {
   describe('#diffWords', function() {
+    // Diff html and plain text
+    it('should diff on html and plain text', function() {
+      let diffResult = diffWords('New Value', '<h1>New Value</h1>', { ignoreHtml: true });
+      expect(convertChangesToXML(diffResult)).to.equal('New Value');
+
+      diffResult = diffWords('New Value', '<h1>New Value test</h1> <b>additional</b> value', { ignoreHtml: true });
+      expect(convertChangesToXML(diffResult)).to.equal('New Value<ins> test additional value</ins>');
+    });
+
     it('should diff whitespace', function() {
       const diffResult = diffWords('New Value', 'New  ValueMoreData');
       expect(convertChangesToXML(diffResult)).to.equal('New  <del>Value</del><ins>ValueMoreData</ins>');
