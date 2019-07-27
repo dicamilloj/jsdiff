@@ -7,11 +7,11 @@ describe('WordDiff', function() {
   describe('#diffWords', function() {
     // Diff html and plain text
     it('should diff on html and plain text', function() {
-      let diffResult = diffWords('New Value', '<h1>New Value</h1>', { ignoreHtml: true });
-      expect(convertChangesToXML(diffResult)).to.equal('New Value');
+      let diffResult = diffWords('New Value', '<h1>New Value</h1>', { tokenizeHtml: true, ignoreWhitespace: true });
+      expect(convertChangesToXML(diffResult)).to.equal('<ins>&lt;h1&gt;</ins>New Value<ins>&lt;/h1&gt;</ins>');
 
-      diffResult = diffWords('New Value', '<h1>New Value test</h1> <b>additional</b> value', { ignoreHtml: true });
-      expect(convertChangesToXML(diffResult)).to.equal('New Value<ins> test additional value</ins>');
+      diffResult = diffWords('New Value', '<h1>New Value test</h1> <b>additional</b> value', { tokenizeHtml: true });
+      expect(convertChangesToXML(diffResult)).to.equal('<ins>&lt;h1&gt;</ins>New Value<ins> test&lt;/h1&gt; &lt;b&gt;additional&lt;/b&gt; value</ins>');
     });
 
     it('should diff whitespace', function() {
