@@ -6,17 +6,10 @@
     "diff",
     "javascript"
   ],
-  "maintainers": [
-    "Kevin Decker <kpdecker@gmail.com> (http://incaseofstairs.com)"
-  ],
-  "bugs": {
-    "email": "kpdecker@gmail.com",
-    "url": "http://github.com/kpdecker/jsdiff/issues"
-  },
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kpdecker/jsdiff.git"
+    "url": "git://github.com/dicamilloj/jsdiff.git"
   },
   "engines": {
     "node": ">=0.3.1"
